@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Demo Chat</title>
+    <link href="/bootstrap.css" rel="stylesheet">
+    <style>
+        body {
+            padding:20px;
+        }
+        #console {
+            height: 400px;
+            overflow: auto;
+        }
+        .username-msg {color:orange;}
+        .connect-msg {color:green;}
+        .disconnect-msg {color:red;}
+        .send-msg {color:#888}
+    </style>
+    <script src="/js/socket.io/socket.io.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script th:inline="javascript">
+        var actSno = [[${actSno}]];
+        var userName = 'user' + Math.floor((Math.random()*1000)+1);
+        var serviceJob = [[${service}]];
+        var mmbrId = [[${mmbrId}]];
+        var serviceUrl = [[${serviceUrl}]];
+        var gameSeq = [[${gameSeq}]];
+        
+        //Create channel connection
+        //var socket =  io.connect('http://localhost:9090/?socket_id='+actSno);
+        //var socket =  io.connect('https://auct.market09.kr/?socket_id='+actSno);
+        var socket =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+
+
+        socket.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server!</span>');
+        });
+        
+        socket.on('live', function(message) {
+            output('<span class="username-msg">response : ' + message +'</span>');
+        });
+        
+        socket.on('normal', function(message) {
+            output('<span class="username-msg">response : ' + message +'</span>');
+        });
+        
+        socket.on('my', function(message) {
+            output('<span class="username-msg">response : ' + message +'</span>');
+        });
+
+        socket.on('disconnect', function() {
+            output('<span class="disconnect-msg">The client has disconnected!</span>');
+        });
+
+        //Closing a channel connection can be monitored by the @ OnDisconnect annotated method
+        function sendDisconnect() {
+            socket.disconnect();
+        }
+
+        function initMessage() {
+            var jsonObject = {
+                request: "auction",
+                type: "aos",
+                service: serviceJob,
+                msg: "init",
+                mmbr_id: "",
+                bid_amnt: 0
+
+            };    
+            // jsonObject = '{"request":"auction","type":"app","msg":"init","bid_amnt":0,"mmbr_id":""}';
+            socket.emit('normal', jsonObject);
+        }
+
+        function sendMessage() {
+            var message = $('#msg').val();
+            $('#msg').val('');
+            var jsonObject = {
+                request: "auction",
+                type: "aos",
+                service: serviceJob,
+                msg: "bid",
+                game_seq: gameSeq,
+                jsn_auth: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0a19pZCI6OTMzMiwidWlkIjoiTS1jZTgyYWE0NC1mNmE1LTRjYmEtOWUxMi00ZGY3YjQ4NGFiOWUiLCJ1c2VyX3NubyI6ODIzOSwidXR5cGUiOiJtbWJyIiwiYXR5cGUiOiIzcmQiLCJpZCI6InNvY2tfdGVzdCIsInN0dXMiOiIwMSIsInB3ZF9leHByIjoiIiwiam9pbl9jZCI6IjIiLCJzbXBsX2lkIjoiMTk1MTAyMDI0MyIsIm9yZG5vIjowLCJzbXNfb2NwY19jZCI6IjAxIiwiaXNzIjoiamFzb25ncnVwLmNvLmtyIiwic3ViIjoibW1iclwvMlwvMTk1MTAyMDI0MyIsImF1ZCI6Im1hcmtldDA5IiwiaWF0IjoxNjg1NTE0NDE5LCJuYmYiOjE2ODU1MTQ0MTksImV4cCI6MTY4NTYwMDgxOSwiaHR0cDpcL1wvbWFya2V0MDkua3IiOnRydWV9.R5JVNNWE3Jin-1UlMqnQfhBG6nEDOGtK0iyLDibDOGo",
+                //mmbr_id: "KAh1yikouz4pathzzc",  // hansol   KAh0ijo66btu1g7mqa  KAh0ijow96pxczajvw  KAh0ildmhyssb8i3xe  KAh0jxktxqlw5lg2wh
+                //mmbr_id: "APgxk26dcv0t3k69tw",  
+                //mmbr_id: "APh0oe9c4ywmdr9f7p",
+                //mmbr_id: "NAgwvt9ca7u3b7h1jm",
+                //mmbr_id: "NAgxonuofavqd63s1o",  // jasonapp019
+                //mmbr_id: "KAh0l7dobxhx5qux8p",  // jasonapp018 KAgmwc5h3u1z9t5i1r KAgo743415137o59d1 KAgr9irtoro25001s0 KAgr9m20t5q38wiy3r  
+                mmbr_id: mmbrId,  // jasonapp014 KAgw2umikxyp48jh0e KAgw8r1b0xo75yzk5i KAgw9sgeeols5gz9vg KAgwb4qcw8k31381ob
+                bid_amnt: message
+            };
+            //Method to send back-end @ OnEvent("chatevent") annotation
+            //jsonObject = '{"request":"auction","type":"app","msg":"bid","bid_amnt":'+message+',"mmbr_id":"KAgxntvxo1ju7v2tsp"}';
+            socket.emit('normal', jsonObject);
+        }
+
+        function initLive() {
+            var jsonObject = {
+                request: "auction",
+                type: "aos",
+                service: serviceJob,
+                msg: "init",
+                mmbr_id: "",
+                bid_amnt: 0
+
+            };      
+            socket.emit('live', jsonObject);
+        }
+
+        function sendLive() {
+            var message = $('#msg').val();
+            $('#msg').val('');
+            var jsonObject = {
+                request: "auction",
+                type: "aos",
+                service: serviceJob,
+                msg: "bid",
+                //mmbr_id: "KAh1yncwix175zub0m",  // hansol
+                //mmbr_id: "APgxk26dcv0t3k69tw",
+                //mmbr_id: "APh0oe9c4ywmdr9f7p",
+                //mmbr_id: "NAgxonuofavqd63s1o",  // jasonapp019
+                //mmbr_id: "KAh0l7dobxhx5qux8p",
+                mmbr_id: mmbrId,
+                bid_amnt: message
+            };
+            //Method to send back-end @ OnEvent("chatevent") annotation
+            socket.emit('live', jsonObject);
+        }
+
+        function initMy() {
+            console.log("test");
+            var jsonObject = {
+                request: "auction",
+                type: "aos",
+                service: serviceJob,
+                msg: "init",
+                mmbr_id: "",
+                bid_amnt: 0
+
+            };      
+            socket.emit('my', jsonObject);
+        }
+
+        function output(message) {
+            var currentTime = "<span class='time'>" +  moment().format('HH:mm:ss.SSS') + "</span>";
+            var element = $("<div>" + currentTime + " " + message + "</div>");
+            $('#console').prepend(element);
+        }
+
+        $(document).keydown(function(e){
+            if(e.keyCode == 13) {
+                $('#send').click();
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+<h1>Netty-socketio Demo Chat</h1>
+<br/>
+<div id="console" class="well">
+</div>
+<form class="well form-inline" onsubmit="return false;">
+    <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
+    <button type="button" onClick="initMessage()" class="btn" id="send">Init(nor)</button>
+    <button type="button" onClick="sendMessage()" class="btn" id="send">Send(nor)</button>
+    <button type="button" onClick="initLive()" class="btn" id="send">Init(live)</button>
+    <button type="button" onClick="sendLive()" class="btn" id="send">Send(live)</button>
+    <button type="button" onClick="initMy()" class="btn" id="send">Init(my)</button>
+    <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
+</form>
+
+</body>
+</html>

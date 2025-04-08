@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Demo Chat</title>
+    <link href="/bootstrap.css" rel="stylesheet">
+    <style>
+        body {
+            padding:20px;
+        }
+        #console {
+            height: 400px;
+            overflow: auto;
+        }
+        .username-msg {color:orange;}
+        .connect-msg {color:green;}
+        .disconnect-msg {color:red;}
+        .send-msg {color:#888}
+    </style>
+    <script src="/js/socket.io/socket.io.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script th:inline="javascript">
+        var actSno = [[${actSno}]];
+        var mmbrId = [[${mmbrId}]];
+        var userName = 'user' + Math.floor((Math.random()*1000)+1);
+
+        var serviceUrl = [[${serviceUrl}]];
+        
+        //var socket =  io.connect('http://localhost:9090/?socket_id='+actSno);
+        var socket =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+
+        socket.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server0!</span>');
+        });
+        
+        socket.on('live', function(message) {
+            output('<span class="username-msg">response : ' + message +'</span>');
+
+            func();
+            obj = JSON.parse(message);            
+            sendBid(obj.data.act_stus.max_bid);
+        }); 
+
+        async function func() {
+            await sleep(100);
+            console.log('Do something...');
+          }
+
+        function sendBid(bid) {
+            var jsonObject = {request: "auction", type: "aos", service: serviceUrl, msg: "bid", mmbr_id: mmbrId, bid_amnt: bid+100};
+            //var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid+100};
+            //var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid+100};
+            //var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAgvi2jzcxxa3hluv7", bid_amnt: bid+100};
+            //var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAgvidjfz1ct3h303h", bid_amnt: bid+100};
+            //var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAgvg2mqwgoxak0bzs", bid_amnt: bid+100};
+            socket.emit('live', jsonObject);
+        }
+
+        function initMessage() {
+            var jsonObject = {
+                request: "auction",
+                type: "aos",
+                service: serviceUrl,
+                msg: "init",
+                mmbr_id: "",
+                bid_amnt: 0
+
+            };    
+            socket.emit('live', jsonObject);
+        }
+
+        function sendMessage() {
+            var message = $('#msg').val();
+            $('#msg').val('');
+            var jsonObject = {
+                request: "auction",
+                type: "aos",
+                service: serviceUrl,
+                msg: "bid",
+                mmbr_id: mmbrId,
+                bid_amnt: message
+            };
+            socket.emit('live', jsonObject);
+        }
+
+        function output(message) {
+            var currentTime = "<span class='time'>" +  moment().format('HH:mm:ss.SSS') + "</span>";
+            var element = $("<div>" + currentTime + " " + message + "</div>");
+            $('#console').prepend(element);
+        }
+
+        $(document).keydown(function(e){
+            if(e.keyCode == 13) {
+                $('#send').click();
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+<h1>Netty-socketio Demo Chat</h1>
+<br/>
+<div id="console" class="well">
+</div>
+<form class="well form-inline" onsubmit="return false;">
+    <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
+    <button type="button" onClick="initMessage()" class="btn" id="send">Init(nor)</button>
+    <button type="button" onClick="sendMessage()" class="btn" id="send">Send(nor)</button>
+</form>
+
+</body>
+</html>

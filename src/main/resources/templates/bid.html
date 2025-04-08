@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Demo Chat</title>
+    <link href="/bootstrap.css" rel="stylesheet">
+    <style>
+        body {
+            padding:20px;
+        }
+        #console {
+            height: 400px;
+            overflow: auto;
+        }
+        .username-msg {color:orange;}
+        .connect-msg {color:green;}
+        .disconnect-msg {color:red;}
+        .send-msg {color:#888}
+    </style>
+    <script src="/js/socket.io/socket.io.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script th:inline="javascript">
+        var actSno = [[${actSno}]];
+        var userName = 'user' + Math.floor((Math.random()*1000)+1);
+
+        var serviceUrl = [[${serviceUrl}]];
+        
+        var socket0 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket1 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket2 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket3 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket4 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket5 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket6 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket7 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket8 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket9 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+        var socket10 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket11 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket12 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket13 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket14 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket15 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket16 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket17 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket18 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket19 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+        var socket20 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket21 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket22 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket23 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket24 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket25 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket26 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket27 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket28 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket29 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+        var socket30 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket31 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket32 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket33 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket34 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket35 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket36 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket37 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket38 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket39 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+        var socket40 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket41 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket42 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket43 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket44 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket45 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket46 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket47 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket48 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket49 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+        var socket50 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket51 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket52 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket53 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket54 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket55 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket56 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket57 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket58 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket59 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+        var socket60 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket61 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket62 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket63 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket64 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket65 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket66 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket67 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket68 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket69 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+        var socket70 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket71 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket72 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket73 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket74 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket75 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket76 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket77 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket78 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket79 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+        var socket80 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket81 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket82 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket83 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket84 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket85 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket86 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket87 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket88 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket89 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+        var socket90 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket91 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket92 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket93 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket94 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket95 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket96 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket97 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket98 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        var socket99 =  io.connect('https://devauct.market09.kr/?socket_id='+actSno);
+        
+
+        socket0.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server0!</span>');
+        });
+        socket1.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server1!</span>');
+        });
+        socket2.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server2!</span>');
+        });
+        socket3.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server3!</span>');
+        });
+        socket4.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server4!</span>');
+        });
+        socket5.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server5!</span>');
+        });
+        socket6.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server6!</span>');
+        });
+        socket7.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server7!</span>');
+        });
+        socket8.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server8!</span>');
+        });
+        socket9.on('connect', function() {
+            output('<span class="connect-msg">Client has connected to the server9!</span>');
+        });
+        
+        socket1.on('normal', function(message) {
+            output('<span class="username-msg">response : ' + message +'</span>');
+        }); 
+
+        function sendTotal() {
+            
+            for(var i=1;i<10000;i++) {
+                var bid = 1000 + (100*i)
+                var mod = i % 100;
+                switch(mod) {
+                    case 0:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket0.emit('normal', jsonObject);
+                        break;
+                    case 1:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket1.emit('normal', jsonObject);
+                        break;
+                    case 2:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket2.emit('normal', jsonObject);
+                        break;
+                    case 3:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket3.emit('normal', jsonObject);
+                        break;
+                    case 4:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket4.emit('normal', jsonObject);
+                        break;
+                    case 5:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket5.emit('normal', jsonObject);
+                        break;
+                    case 6:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket6.emit('normal', jsonObject);
+                        break;
+                    case 7:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket7.emit('normal', jsonObject);
+                        break;
+                    case 8:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket8.emit('normal', jsonObject);
+                        break;
+                    case 9:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket9.emit('normal', jsonObject);
+                        break;
+                    case 10:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket10.emit('normal', jsonObject);
+                        break;
+                    case 11:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket11.emit('normal', jsonObject);
+                        break;
+                    case 12:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket12.emit('normal', jsonObject);
+                        break;
+                    case 13:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket13.emit('normal', jsonObject);
+                        break;
+                    case 14:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket14.emit('normal', jsonObject);
+                        break;
+                    case 15:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket15.emit('normal', jsonObject);
+                        break;
+                    case 16:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket16.emit('normal', jsonObject);
+                        break;
+                    case 17:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket17.emit('normal', jsonObject);
+                        break;
+                    case 18:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket18.emit('normal', jsonObject);
+                        break;
+                    case 19:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket19.emit('normal', jsonObject);
+                        break;
+                    case 20:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket20.emit('normal', jsonObject);
+                        break;
+                    case 21:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket21.emit('normal', jsonObject);
+                        break;
+                    case 22:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket22.emit('normal', jsonObject);
+                        break;
+                    case 23:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket23.emit('normal', jsonObject);
+                        break;
+                    case 24:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket24.emit('normal', jsonObject);
+                        break;
+                    case 25:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket25.emit('normal', jsonObject);
+                        break;
+                    case 26:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket26.emit('normal', jsonObject);
+                        break;
+                    case 27:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket27.emit('normal', jsonObject);
+                        break;
+                    case 28:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket28.emit('normal', jsonObject);
+                        break;
+                    case 29:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket29.emit('normal', jsonObject);
+                        break;
+                    case 30:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket30.emit('normal', jsonObject);
+                        break;
+                    case 31:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket31.emit('normal', jsonObject);
+                        break;
+                    case 32:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket32.emit('normal', jsonObject);
+                        break;
+                    case 33:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket33.emit('normal', jsonObject);
+                        break;
+                    case 34:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket34.emit('normal', jsonObject);
+                        break;
+                    case 35:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket35.emit('normal', jsonObject);
+                        break;
+                    case 36:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket36.emit('normal', jsonObject);
+                        break;
+                    case 37:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket37.emit('normal', jsonObject);
+                        break;
+                    case 38:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket38.emit('normal', jsonObject);
+                        break;
+                    case 39:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket39.emit('normal', jsonObject);
+                        break;
+                    case 40:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket40.emit('normal', jsonObject);
+                        break;
+                    case 41:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket41.emit('normal', jsonObject);
+                        break;
+                    case 42:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket42.emit('normal', jsonObject);
+                        break;
+                    case 43:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket43.emit('normal', jsonObject);
+                        break;
+                    case 44:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket44.emit('normal', jsonObject);
+                        break;
+                    case 45:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket45.emit('normal', jsonObject);
+                        break;
+                    case 46:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket46.emit('normal', jsonObject);
+                        break;
+                    case 47:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket47.emit('normal', jsonObject);
+                        break;
+                    case 48:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket48.emit('normal', jsonObject);
+                        break;
+                    case 49:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket49.emit('normal', jsonObject);
+                        break;
+                    case 50:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket50.emit('normal', jsonObject);
+                        break;
+                    case 51:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket51.emit('normal', jsonObject);
+                        break;
+                    case 52:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket52.emit('normal', jsonObject);
+                        break;
+                    case 53:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket53.emit('normal', jsonObject);
+                        break;
+                    case 54:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket54.emit('normal', jsonObject);
+                        break;
+                    case 55:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket55.emit('normal', jsonObject);
+                        break;
+                    case 56:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket56.emit('normal', jsonObject);
+                        break;
+                    case 57:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket57.emit('normal', jsonObject);
+                        break;
+                    case 58:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket58.emit('normal', jsonObject);
+                        break;
+                    case 59:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket59.emit('normal', jsonObject);
+                        break;
+                    case 60:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket60.emit('normal', jsonObject);
+                        break;
+                    case 61:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket61.emit('normal', jsonObject);
+                        break;
+                    case 62:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket62.emit('normal', jsonObject);
+                        break;
+                    case 63:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket63.emit('normal', jsonObject);
+                        break;
+                    case 64:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket64.emit('normal', jsonObject);
+                        break;
+                    case 65:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket65.emit('normal', jsonObject);
+                        break;
+                    case 66:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket66.emit('normal', jsonObject);
+                        break;
+                    case 67:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket67.emit('normal', jsonObject);
+                        break;
+                    case 68:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket68.emit('normal', jsonObject);
+                        break;
+                    case 69:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket69.emit('normal', jsonObject);
+                        break;
+                    case 70:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket70.emit('normal', jsonObject);
+                        break;
+                    case 71:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket71.emit('normal', jsonObject);
+                        break;
+                    case 72:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket72.emit('normal', jsonObject);
+                        break;
+                    case 73:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket73.emit('normal', jsonObject);
+                        break;
+                    case 74:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket74.emit('normal', jsonObject);
+                        break;
+                    case 75:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket75.emit('normal', jsonObject);
+                        break;
+                    case 76:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket76.emit('normal', jsonObject);
+                        break;
+                    case 77:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket77.emit('normal', jsonObject);
+                        break;
+                    case 78:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket78.emit('normal', jsonObject);
+                        break;
+                    case 79:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket79.emit('normal', jsonObject);
+                        break;
+                    case 80:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket80.emit('normal', jsonObject);
+                        break;
+                    case 81:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket81.emit('normal', jsonObject);
+                        break;
+                    case 82:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket82.emit('normal', jsonObject);
+                        break;
+                    case 83:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket83.emit('normal', jsonObject);
+                        break;
+                    case 84:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket84.emit('normal', jsonObject);
+                        break;
+                    case 85:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket85.emit('normal', jsonObject);
+                        break;
+                    case 86:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket86.emit('normal', jsonObject);
+                        break;
+                    case 87:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket87.emit('normal', jsonObject);
+                        break;
+                    case 88:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket88.emit('normal', jsonObject);
+                        break;
+                    case 89:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket89.emit('normal', jsonObject);
+                        break;
+                    case 90:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket90.emit('normal', jsonObject);
+                        break;
+                    case 91:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APgxk26dcv0t3k69tw", bid_amnt: bid};
+                        socket91.emit('normal', jsonObject);
+                        break;
+                    case 92:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket92.emit('normal', jsonObject);
+                        break;
+                    case 93:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket93.emit('normal', jsonObject);
+                        break;
+                    case 94:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket94.emit('normal', jsonObject);
+                        break;
+                    case 95:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket95.emit('normal', jsonObject);
+                        break;
+                    case 96:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "APh0oe9c4ywmdr9f7p", bid_amnt: bid};
+                        socket96.emit('normal', jsonObject);
+                        break;
+                    case 97:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgwvt9ca7u3b7h1jm", bid_amnt: bid};
+                        socket97.emit('normal', jsonObject);
+                        break;
+                    case 98:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "NAgxonuofavqd63s1o", bid_amnt: bid};
+                        socket98.emit('normal', jsonObject);
+                        break;
+                    case 99:
+                        var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: "KAh1yikouz4pathzzc", bid_amnt: bid};
+                        socket99.emit('normal', jsonObject);
+                        break;
+                }
+                func();
+            }
+
+            console.log("test end");
+        }
+
+        async function func() {
+            await sleep(500) // 3초
+            console.log('Do something...')
+          }
+
+        function send(socket, id, bid) {
+            var jsonObject = {request: "auction", type: "aos", service: "jasonapp019", msg: "bid", mmbr_id: id, bid_amnt: bid};
+            socket.emit('normal', jsonObject);
+        }
+
+        function initMessage() {
+            var jsonObject = {
+                request: "auction",
+                type: "aos",
+                service: "jasonapp019",
+                msg: "init",
+                mmbr_id: "",
+                bid_amnt: 0
+
+            };    
+            socket1.emit('normal', jsonObject);
+        }
+
+        function sendMessage() {
+            var message = $('#msg').val();
+            $('#msg').val('');
+            var jsonObject = {
+                request: "auction",
+                type: "aos",
+                service: "jasonapp019",
+                msg: "bid",
+                mmbr_id: "NAgxonuofavqd63s1o",
+                bid_amnt: message
+            };
+            socket1.emit('normal', jsonObject);
+        }
+
+        function output(message) {
+            var currentTime = "<span class='time'>" +  moment().format('HH:mm:ss.SSS') + "</span>";
+            var element = $("<div>" + currentTime + " " + message + "</div>");
+            $('#console').prepend(element);
+        }
+
+        $(document).keydown(function(e){
+            if(e.keyCode == 13) {
+                $('#send').click();
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+<h1>Netty-socketio Demo Chat</h1>
+<br/>
+<div id="console" class="well">
+</div>
+<form class="well form-inline" onsubmit="return false;">
+    <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
+    <button type="button" onClick="initMessage()" class="btn" id="send">Init(nor)</button>
+    <button type="button" onClick="sendMessage()" class="btn" id="send">Send(nor)</button>
+    <button type="button" onClick="sendTotal()" class="btn">Total</button>
+</form>
+
+</body>
+</html>
